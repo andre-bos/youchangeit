@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('petitions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title')->unique();
-            $table->text('description');
+            $table->string('titolo')->unique();
+            $table->text('descrizione');
+            $table->string('area_interesse');
+            $table->string('paese_interesse');
+            $table->string('citta_interesse');
+            $table->string('provincia_interesse');
             $table->string('img_url');
             $table->string('status');
 

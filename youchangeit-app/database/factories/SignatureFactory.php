@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Petition;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,10 @@ class SignatureFactory extends Factory
     {
         return [
             //
+
+            'user_id' => User::get()->random()->id,
+            'petition_id' => Petition::get()->random()->id,
+            'created_at' => fake()->dateTime()
         ];
     }
 }

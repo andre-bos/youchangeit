@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
-            $table->text('description')->nullable(false);
+            $table->string('nome');
+            $table->text('descrizione');
             $table->string('img_url');
         });
     }
