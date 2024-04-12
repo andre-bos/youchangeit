@@ -8,12 +8,24 @@ use App\Models\Petition;
 
 class PetitionController extends Controller
 {
+
+    /**
+     * Applico il middleware auth a tutte le rotte relative ai metodi che devono essere protetti tranne index e show
+     */
+
+     public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']); 
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+
+        return "Sono il metodo index di petitions --PUBBLICO";
     }
 
     /**
@@ -22,6 +34,8 @@ class PetitionController extends Controller
     public function create()
     {
         //
+
+        return "Sono il metodo create di petitions --AUTENTICATO";
     }
 
     /**
@@ -30,6 +44,8 @@ class PetitionController extends Controller
     public function store(StorePetitionRequest $request)
     {
         //
+
+        return "Sono il metodo store di petitions --AUTENTICATO";
     }
 
     /**
@@ -38,6 +54,8 @@ class PetitionController extends Controller
     public function show(Petition $petition)
     {
         //
+
+        return "Sono il metodo show di petitions --NON AUTENTICATO";
     }
 
     /**
@@ -46,6 +64,8 @@ class PetitionController extends Controller
     public function edit(Petition $petition)
     {
         //
+
+        return "Sono il metodo edit di petitions --AUTENTICATO";
     }
 
     /**
@@ -53,7 +73,7 @@ class PetitionController extends Controller
      */
     public function update(UpdatePetitionRequest $request, Petition $petition)
     {
-        //
+        // // Per adesso, lo ignoro perché non sto facendo chiamate AJAX
     }
 
     /**
@@ -61,6 +81,6 @@ class PetitionController extends Controller
      */
     public function destroy(Petition $petition)
     {
-        //
+        // Per adesso, lo ignoro perché non sto facendo chiamate AJAX
     }
 }
