@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PetitionController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Petition;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $petitions = Petition::take(5)->get(); // Prendo solo le prime 5 petizioni
+    return view('home', ['petitions' => $petitions]);
 });
 
 Route::get('/dashboard', function () {

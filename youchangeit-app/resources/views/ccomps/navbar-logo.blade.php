@@ -1,0 +1,1 @@
+<img src="./images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Landwind Logo" />
