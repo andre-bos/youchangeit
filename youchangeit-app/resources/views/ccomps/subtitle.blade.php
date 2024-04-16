@@ -1,1 +1,1 @@
-<p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">{{$text}}</p>
+<p class="mb-6 font-light text-green-700 dark:text-green-400 md:text-lg {{$addClass}}">{{$text}}</p>

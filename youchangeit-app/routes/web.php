@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $petitions = Petition::with('user', 'category', 'decMaker')->take(5)->get(); // Prendo solo le prime 5 petizioni e vi associo i relativi utenti e le relative categorie sfruttando le relazioni che ho definito nei models 
-    return view('home', ['petitions' => $petitions]);
-});
+Route::get('/', [PetitionController::class, 'indexLatest']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

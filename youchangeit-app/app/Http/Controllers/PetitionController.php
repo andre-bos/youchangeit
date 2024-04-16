@@ -15,7 +15,23 @@ class PetitionController extends Controller
 
      public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']); 
+        $this->middleware('auth')->except(['index', 'show', 'indexLatest']); 
+    }
+
+    /**
+     * Display a listing of the latest 5 active petitions.
+     */
+    public function indexLatest()
+    {
+        //
+
+        $petitions = Petition::with('user', 'category', 'decMaker')
+        ->where('status', 'attiva')
+        ->orderBy('created_at', 'desc')
+        ->take(5)
+        ->get(); // Prendo solo le prime 5 petizioni attive, le ordino in ordine decrescente di creazione e vi associo i relativi utenti, le relative categorie e i decision maker sfruttando le relazioni che ho definito nei models 
+
+        return view('home', ['petitions' => $petitions]);
     }
 
     /**

@@ -9,9 +9,11 @@ use Illuminate\View\Component;
 class Subtitle extends Component
 {
     public string $text;
-    public function __construct(string $text = '')
+    public string $addClass;
+    public function __construct(string $text = '', string $addClass = '')
     {
         $this->text = $text;
+        $this->addClass = $addClass;
     }
 
     /**
