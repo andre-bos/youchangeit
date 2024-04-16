@@ -1,11 +1,13 @@
-<section class="pl-5 grid p-5 gap-4 md:grid-cols-3">
+<section class="pl-5 grid p-5 gap-4 md:grid-cols-3 grid-flow-row-dense">
     <x-h2-title text="Petizioni in corso" addClass="md:col-span-3" />
     @foreach ($petitions as $petition)
         <x-petition-card
-            :decMaker="$petition->dec_maker_id" 
+            :decMakerNome="$petition->decMaker->nome"
+            :decMakerCognome="$petition->decMaker->cognome"  
             :titolo="$petition->titolo" 
             :descrizione="$petition->descrizione" 
-            :userId="$petition->user_id"
+            :userNome="$petition->user->nome"
+            :userCognome="$petition->user->cognome"
             :imgUrl="$petition->img_url"
         />
     @endforeach

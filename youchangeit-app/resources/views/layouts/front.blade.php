@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-   <header>
+   <header class="fixed w-full">
         @yield('header')
    </header>
 

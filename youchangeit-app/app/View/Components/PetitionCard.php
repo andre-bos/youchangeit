@@ -8,18 +8,24 @@ use Illuminate\View\Component;
 
 class PetitionCard extends Component
 {
-    public string $decMaker;
+    public string $decMakerNome;
+    public string $decMakerCognome;
     public string $titolo;
     public string $descrizione;
-    public string $userId;
-    public $imgUrl;
-    public function __construct(string $decMaker = '', string $titolo = '', string $descrizione = '', string $userId = '', $imgUrl = '')
+    public string $userNome;
+    public string $userCognome;
+    public string $imgUrl;
+    public string $categoria;
+    public function __construct(string $decMakerNome = '', string $decMakerCognome = '', string $titolo = '', string $descrizione = '', string $userNome = '', $userCognome = '', $imgUrl = '', $categoria = '')
     {
-        $this->decMaker = $decMaker;
+        $this->decMakerNome = $decMakerNome;
+        $this->decMakerCognome = $decMakerCognome;
         $this->titolo = $titolo;
         $this->descrizione = $descrizione;
-        $this->userId = $userId;
+        $this->userNome = $userNome;
+        $this->userCognome = $userCognome;
         $this->imgUrl = $imgUrl;
+        $this->categoria = $categoria;
     }
 
     /**

@@ -16,7 +16,12 @@ class Petition extends Model
     return $this->belongsTo(Category::class);
 }
 
-public function user(): BelongsTo
+    public function decMaker(): BelongsTo
+    {
+    return $this->belongsTo(DecMaker::class);
+    }
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

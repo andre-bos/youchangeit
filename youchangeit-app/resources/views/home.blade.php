@@ -1,7 +1,3 @@
-<?php
-print_r($petitions);
-?>
-
 <x-frontend-layout>
     @section('header')
         <x-navbar />
