@@ -8,9 +8,8 @@
 </head>
 <body>
    <header class="fixed w-full">
-        @yield('header')
+        <x-navbar />
    </header>
-
    <main>
         @yield('main')
    </main>
