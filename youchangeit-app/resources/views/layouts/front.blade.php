@@ -7,12 +7,17 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-   <header class="fixed w-full">
+   <header class="sticky top-0">
         <x-navbar />
+        @yield('header')
    </header>
    <main>
         @yield('main')
    </main>
-   <footer></footer>
+   <footer>
+     @yield('footer')
+   </footer>
+
+   <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
 </body>
 </html>

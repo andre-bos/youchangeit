@@ -1,1 +1,1 @@
-<h2 class="mb-4 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white {{$addClass}}">{{$text}}</h2>
+<h2 class="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white {{$addClass}}">{{$text}}</h2>

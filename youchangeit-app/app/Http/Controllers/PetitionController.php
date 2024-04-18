@@ -26,6 +26,7 @@ class PetitionController extends Controller
         //
 
         $petitions = Petition::with('user', 'category', 'decMaker')
+        ->withCount('signatures')
         ->where('status', 'attiva')
         ->orderBy('created_at', 'desc')
         ->take(5)
@@ -71,7 +72,7 @@ class PetitionController extends Controller
     {
         //
 
-        return "Sono il metodo show di petitions --NON AUTENTICATO";
+        return view('petitiondetail', ['petition' => $petition]);
     }
 
     /**

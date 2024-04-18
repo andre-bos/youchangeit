@@ -10,22 +10,28 @@ class PetitionCard extends Component
 {
     public string $decMakerNome;
     public string $decMakerCognome;
+    public string $petitionId;
     public string $titolo;
     public string $descrizione;
     public string $userNome;
     public string $userCognome;
-    public string $imgUrl;
+    public string $imgPetition;
+    public string $imgAutore;
     public string $categoria;
-    public function __construct(string $decMakerNome = '', string $decMakerCognome = '', string $titolo = '', string $descrizione = '', string $userNome = '', $userCognome = '', $imgUrl = '', $categoria = '')
+    public string $contoFirme;
+    public function __construct(string $decMakerNome = '', string $decMakerCognome = '', string $petitionId = '', string $titolo = '', string $descrizione = '', string $userNome = '', string $userCognome = '', string $imgPetition = '', string $imgAutore = '', string $categoria = '', string $contoFirme = '')
     {
         $this->decMakerNome = $decMakerNome;
         $this->decMakerCognome = $decMakerCognome;
+        $this->petitionId = $petitionId;
         $this->titolo = $titolo;
         $this->descrizione = $descrizione;
         $this->userNome = $userNome;
         $this->userCognome = $userCognome;
-        $this->imgUrl = $imgUrl;
+        $this->imgPetition = $imgPetition;
+        $this->imgAutore = $imgAutore;
         $this->categoria = $categoria;
+        $this->contoFirme = $contoFirme;
     }
 
     /**
