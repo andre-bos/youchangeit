@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDecMakerRequest;
-use App\Http\Requests\UpdateDecMakerRequest;
-use App\Models\DecMaker;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class DecMakerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +26,7 @@ class DecMakerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDecMakerRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -37,16 +34,15 @@ class DecMakerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $decMaker)
+    public function show(User $user)
     {
-       // dd($decMaker);
-        return 'Sono il metodo show di decMaker ' . $decMaker->nome;
+        return 'Sono il metodo show di user ' . $user;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DecMaker $decMaker)
+    public function edit(User $user)
     {
         //
     }
@@ -54,7 +50,7 @@ class DecMakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDecMakerRequest $request, DecMaker $decMaker)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -62,7 +58,7 @@ class DecMakerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DecMaker $decMaker)
+    public function destroy(User $user)
     {
         //
     }
