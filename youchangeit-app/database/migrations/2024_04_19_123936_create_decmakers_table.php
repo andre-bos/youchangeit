@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dec_makers', function (Blueprint $table) {
+        Schema::create('decmakers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nome');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dec_makers');
+        Schema::dropIfExists('decmakers');
     }
 };

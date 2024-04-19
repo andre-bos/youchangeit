@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDecMakerRequest;
-use App\Http\Requests\UpdateDecMakerRequest;
-use App\Models\DecMaker;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDecmakerRequest;
+use App\Http\Requests\UpdateDecmakerRequest;
+use App\Models\Decmaker;
 
-class DecMakerController extends Controller
+class DecmakerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +27,7 @@ class DecMakerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDecMakerRequest $request)
+    public function store(StoreDecmakerRequest $request)
     {
         //
     }
@@ -37,16 +35,15 @@ class DecMakerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $decMaker)
+    public function show(Decmaker $decmaker)
     {
-       // dd($decMaker);
-        return 'Sono il metodo show di decMaker ' . $decMaker->nome;
+        return 'Sono il metodo show di decMaker ' . $decmaker;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DecMaker $decMaker)
+    public function edit(Decmaker $decmaker)
     {
         //
     }
@@ -54,7 +51,7 @@ class DecMakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDecMakerRequest $request, DecMaker $decMaker)
+    public function update(UpdateDecmakerRequest $request, Decmaker $decmaker)
     {
         //
     }
@@ -62,7 +59,7 @@ class DecMakerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DecMaker $decMaker)
+    public function destroy(Decmaker $decmaker)
     {
         //
     }

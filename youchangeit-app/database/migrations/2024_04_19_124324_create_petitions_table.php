@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('citta_interesse');
             $table->string('provincia_interesse');
             $table->string('img_url');
+            $table->integer('obiettivo_firme');
             $table->string('status');
 
             $table->foreignId('user_id');
@@ -30,7 +31,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreignId('dec_maker_id');
-            $table->foreign('dec_maker_id')->references('id')->on('dec_makers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('dec_maker_id')->references('id')->on('decmakers')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

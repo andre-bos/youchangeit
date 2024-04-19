@@ -18,5 +18,15 @@
         <div class="col-span-2 row-start-6 rounded-lg bg-green-100 py-5 pl-2">
             <p class="font-bold text-lg text-green-700">Indirizzata a: <a href="/decmakers/{{$petition->dec_maker_id}}">{{$petition->decMaker->nome}} {{$petition->decMaker->cognome}}</a><span class="ml-2 mr-2">|</span> Promossa da: <a href="/users/{{$petition->user_id}}">{{$petition->user->nome}} {{$petition->user->cognome}}</a></p>
         </div>
+
+
+        <div class="border border-gray-800 rounded col-start-3 row-start-2 self-start">
+            <div class="border-b border-gray-600 grid grid-cols-2">
+                
+            </div>
+            <h3 class="pl-3 mt-4 font-bold text-lg text-black"></h3>
+        </div>
+
+
     </section>
 @endsection

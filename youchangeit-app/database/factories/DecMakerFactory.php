@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DecMaker>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Decmaker>
  */
-class DecMakerFactory extends Factory
+class DecmakerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,8 @@ class DecMakerFactory extends Factory
     {
         $positions = ["Presidente", "Primo Ministro", "Segretario Generale delle Nazioni Unite", "Presidente del Parlamento", "Ministro", "Governatore", "Sindaco", "Ambasciatore", "Presidente di Commissione", "Rettore Universitario", "Direttore Generale", "Capo della Polizia", "Comandante delle Forze Armate", "Direttore Sanitario","Capo di Stato Maggiore", "Prefetto"];
         $entityTypes = ["individual", "institution"];
-
         return [
             //
-
             'nome' => fake()->name(),
             'cognome' => fake()->lastName(),
             'posizione' => fake()->randomElement($positions),
@@ -32,4 +30,5 @@ class DecMakerFactory extends Factory
             'created_at' => fake()->dateTime()
         ];
     }
+
 }

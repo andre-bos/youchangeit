@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\DecMakerController;
 use App\Http\Controllers\PetitionController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Petition;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PetitionController::class, 'indexLatest']);
-Route::resource('/decmakers', DecMakerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
