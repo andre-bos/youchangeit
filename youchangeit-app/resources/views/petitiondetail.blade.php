@@ -26,20 +26,37 @@
         </div>
 
 
-        <div class="border border-gray-800 rounded col-start-3 row-start-2 self-start">
+        <div class="col-start-3 row-start-2 ro">
             <div class="grid grid-cols-2">
                 <div class="col-span-2">
-                    <div class="relative mb-5 pt-1">
-                        <div class="mb-4 flex h-2 overflow-hidden rounded bg-gray-100 text-xs">
-                        <div style="width: {{ ($petition->signatures_count / $petition->obiettivo_firme) * 100 }}%" class="bg-green-500"></div>
-                    </div>
-                    <div class="mb-2 flex items-center justify-between text-xs">
-                        <div class="text-gray-600">{{$petition->signatures_count}}</div>
-                        <div class="text-gray-600">{{$petition->obiettivo_firme}}</div>
+                    <div class="mb-4 flex h-2 overflow-hidden rounded bg-gray-100 text-xs">
+                        <div style="width: {{ ($petition->signatures_count / $petition->obiettivo_firme) * 100 }}%" class="bg-green-700"></div>
                     </div>
                 </div>
+
+                <div class="inline font-bold text-lg text-green-700">
+                    <span class="block text-3xl">{{$petition->signatures_count}}</span>
+                    <span>firme</span>
+                </div>
+
+                <div class="inline justify-self-end font-bold text-lg text-gray-500">
+                    <span class="block text-end text-3xl">{{$petition->obiettivo_firme}}</span>
+                    <span>obiettivo</span>
                 </div>
             </div>
+
+            <h3 class="font-bold text-xl text-black mt-3 tracking-wide">Firma questa petizione</h3>
+
+            <div class="flex my-5">
+                <img src="https://picsum.photos/id/10/200/300" alt="Avatar di..." class="h-[50px] w-[50px] object-cover rounded-full inline-block justify-self-start self-start">
+                <span class="self-center ml-3 font-bold text-xs">Andrea Boschetto</span>
+            </div>
+
+            <h3 class="text-xs font-bold">Sto firmando perché… (opzionale)</h3>
+
+            <form action="">
+                <textarea name="commento" id="" cols="2" rows="5"></textarea>
+            </form>
         </div>
 
 
