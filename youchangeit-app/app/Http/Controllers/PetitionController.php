@@ -68,10 +68,10 @@ class PetitionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Petition $petition)
+    public function show($id)
     {
-        //
-
+        $petition = Petition::withCount('signatures')->find($id);
+        
         return view('petitiondetail', ['petition' => $petition]);
     }
 

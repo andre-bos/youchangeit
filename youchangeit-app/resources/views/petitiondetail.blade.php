@@ -1,3 +1,9 @@
+<?php
+    // print_r($petition->signatures_count);
+    
+    print_r($petition->obiettivo_firme);
+?>
+
 @extends('layouts.front')
 
 @section('main')
@@ -21,10 +27,19 @@
 
 
         <div class="border border-gray-800 rounded col-start-3 row-start-2 self-start">
-            <div class="border-b border-gray-600 grid grid-cols-2">
-                
+            <div class="grid grid-cols-2">
+                <div class="col-span-2">
+                    <div class="relative mb-5 pt-1">
+                        <div class="mb-4 flex h-2 overflow-hidden rounded bg-gray-100 text-xs">
+                        <div style="width: {{ ($petition->signatures_count / $petition->obiettivo_firme) * 100 }}%" class="bg-green-500"></div>
+                    </div>
+                    <div class="mb-2 flex items-center justify-between text-xs">
+                        <div class="text-gray-600">{{$petition->signatures_count}}</div>
+                        <div class="text-gray-600">{{$petition->obiettivo_firme}}</div>
+                    </div>
+                </div>
+                </div>
             </div>
-            <h3 class="pl-3 mt-4 font-bold text-lg text-black"></h3>
         </div>
 
 

@@ -30,4 +30,24 @@ class Petition extends Model
     {
         return $this->hasMany(Signature::class);
     }
+
+    // Aumento dinamicamente l'obiettivo delle firme da raggiungere in maniera proporzionale alle firme già raccolte sulla base di soglie e un coefficiente di moltiplicazione
+    public function getObiettivoFirmeAttribute()
+    {
+        if ($this->signatures_count > 1000) {
+            return ceil($this->signatures_count * 1.1);
+        } elseif ($this->signatures_count > 500) {
+            return ceil($this->signatures_count * 1.2);
+        } elseif ($this->signatures_count > 100) {
+            return ceil($this->signatures_count * 1.3);
+        } elseif ($this->signatures_count > 50) {
+            return ceil($this->signatures_count * 1.4);
+        } elseif ($this->signatures_count > 10) {
+            return ceil($this->signatures_count * 1.5);
+        } elseif ($this->signatures_count > 0) {
+            return ceil($this->signatures_count * 1.5);
+        } else {
+            return 5;
+        }
+    }
 }
