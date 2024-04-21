@@ -17,5 +17,23 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        function({ addComponents }) {
+            addComponents({
+                '.main-template > *': {
+                    gridColumn: '2 / -2',
+                },
+                '.main-template': {
+                    padding: '4em 0',
+                },
+                '.grid-cols-custom-small': {
+                    gridTemplateColumns: 'minmax(1em, 1fr) repeat(3, minmax(150px, 320px)) minmax(1em, 1fr)',
+                },
+                '.grid-cols-custom-medium': {
+                    gridTemplateColumns: 'minmax(1em, 1fr) repeat(3, minmax(150px, 350px)) minmax(1em, 1fr)',
+                },
+            })
+        },
+    ],
 };

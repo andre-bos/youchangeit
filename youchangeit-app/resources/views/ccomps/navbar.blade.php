@@ -5,8 +5,15 @@
                     <x-navbar-text text="YouChangeIT" />
                 </a>
                 <div class="flex items-center lg:order-2">
-                    <x-navbar-button text="Accedi" link="/dashboard" />
-                    <x-navbar-button text="Registrati" link="/register" />
+                    @guest
+                        <x-navbar-button text="Accedi" link="/login?redirect_to={{ urlencode('/') }}" />
+                        <x-navbar-button text="Registrati" link="/register" />
+                    @endguest
+
+                    @auth
+                        <x-user-info />
+                        <x-logout />
+                    @endauth
                     <x-navbar-hamburger dataCollapseToggle="mobile-menu-2" ariaControls="mobile-menu-2" screenReaderText="Apri il menu" />
                 </div>
                 <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
