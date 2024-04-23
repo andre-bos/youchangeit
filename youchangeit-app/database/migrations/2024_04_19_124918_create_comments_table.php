@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->boolean('approvato');
-            $table->text('contenuto');
+            $table->text('contenuto')->nullable();
 
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreignId('petition_id');
             $table->foreign('petition_id')->references('id')->on('petitions');
+
+            $table->foreignId('signature_id');
+            $table->foreign('signature_id')->references('id')->on('signatures')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

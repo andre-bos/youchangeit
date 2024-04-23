@@ -70,8 +70,8 @@ class PetitionController extends Controller
      */
     public function show($id)
     {
-        $petition = Petition::withCount('signatures')->find($id);
-        
+        $petition = Petition::with('comments.user')->withCount('signatures')->find($id);
+
         return view('petitiondetail', ['petition' => $petition]);
     }
 

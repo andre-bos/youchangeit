@@ -32,7 +32,6 @@ class PetitionFactory extends Factory
             'citta_interesse' => fake()->city(),
             'provincia_interesse' => fake()->randomElement($province),
             'img_url' => 'https://picsum.photos/id/'.fake()->randomNumber(2).'/800/600',
-            'obiettivo_firme' => fake()->numberBetween(5, 500),
             'status' => fake()->randomElement($status),
             'user_id' => User::get()->random()->id,
             'category_id' => Category::get()->random()->id,

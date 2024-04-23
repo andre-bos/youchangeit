@@ -11,7 +11,22 @@ class StoreSignatureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Verifica se l'utente è autenticato
+        if (!auth()->check()) {
+            return false;
+        }
+
+        // Verifica se lo stato dell'utente è 'sospeso'
+        if (auth()->user()->status === 'sospeso') {
+            return false;
+        }
+
+        // Verifica se l'utente ha già firmato la petizione
+        $hasSigned = \App\Models\Signature::where('user_id', auth()->id())
+        ->where('petition_id', $this->petition_id)
+        ->exists();
+
+        return !$hasSigned;
     }
 
     /**
@@ -22,7 +37,9 @@ class StoreSignatureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|integer|exists:users,id',
+            'petition_id' => 'required|integer|exists:petitions,id',
+            'commento' => 'nullable|string',
         ];
     }
 }

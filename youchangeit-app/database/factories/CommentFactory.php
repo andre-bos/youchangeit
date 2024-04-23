@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Petition;
+use App\Models\Signature;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,6 +26,7 @@ class CommentFactory extends Factory
             'contenuto' => fake()->text(200),
             'user_id' => User::get()->random()->id,
             'petition_id' => Petition::get()->random()->id,
+            'signature_id' => Signature::factory(),
             'created_at' => fake()->dateTime()
         ];
     }

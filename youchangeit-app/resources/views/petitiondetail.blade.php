@@ -20,8 +20,28 @@
             </div>
             <h3 class="font-bold text-2xl text-black mb-3">Perché è importante la tua firma?</h3>
             <div class="">{{$petition->descrizione}}</div>
-            <div class="rounded-lg bg-green-100 py-5 pl-2 mt-5">
+            <div class="rounded-lg bg-green-100 py-5 pl-2 mt-5 mb-5">
                 <p class="font-bold text-lg text-green-700">Indirizzata a: <a href="/decmakers/{{$petition->dec_maker_id}}">{{$petition->decMaker->nome}} {{$petition->decMaker->cognome}}</a><span class="ml-2 mr-2">|</span> Promossa da: <a href="/users/{{$petition->user_id}}">{{$petition->user->nome}} {{$petition->user->cognome}}</a></p>
+            </div>
+
+            <div class="mt-3">
+                <h3 class="font-bold text-2xl text-black mb-2">Commenti</h3>
+                @if($petition->comments->count() > 0)
+                    <ul>
+                        @foreach ($petition->comments as $comment)
+                            <li>
+                                <x-comment-card
+                                :imgAutore="$comment->user->img_url"
+                                :userNome="$comment->user->nome"
+                                :commento="$comment->contenuto"
+                                :dataCreazione="$comment->created_at"
+                                />
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="font-bold text-large text-black text-center">Non ci sono ancora commenti</p>
+                @endif
             </div>
        </div>
 
@@ -48,6 +68,12 @@
                     $hasSigned = \App\Models\Signature::where('user_id', auth()->id())->where('petition_id', $petition->id)->exists();
                 @endphp
 
+                @if (session('success'))
+                    <x-success-alert :text="session('success')" />
+                @elseif($hasSigned)
+                    <x-danger-alert :boldText="'Attenzione!'" :text="'Hai già firmato questa petizione'" />
+                @endif
+
                 @if(!$hasSigned)
                     <h3 class="font-bold text-xl text-black mt-3 tracking-wide">Firma questa petizione</h3>
                     <div class="flex my-5">
@@ -57,17 +83,18 @@
 
                     <h3 class="text-xs font-bold mb-2">Sto firmando perché… (opzionale)</h3>
 
-                    <form action="tre.it" method="POST">
+                    <form action="/signatures" method="POST">
+                        @csrf
                         <textarea class="form-textarea rounded-lg" name="commento" cols="25" rows="5"></textarea>
+                        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                        <input type="hidden" name="petition_id" value="{{ $petition->id }}">
                         <input type="submit" value="Firma la petizione ora" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 mt-3">
                     </form>
-                @else
-                    <x-danger-alert :boldText="'Attenzione!'" :text="'Hai già firmato questa petizione'" />
                 @endif
             @endauth
 
             @guest
-            <x-call-to-action-button link="{{ route('login', ['redirect_to' => '/petitions/' . $petition->id]) }}" text="Accedi per firmare" class="mt-5" />
+                <x-call-to-action-button link="{{ route('login', ['redirect_to' => '/petitions/' . $petition->id]) }}" text="Accedi per firmare" class="mt-5" />
             @endguest
         </div>
 

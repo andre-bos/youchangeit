@@ -15,6 +15,6 @@ class SignatureSeeder extends Seeder
     {
         //
 
-        Signature::factory(5)->create();
+        Signature::factory(10)->create();
     }
 }

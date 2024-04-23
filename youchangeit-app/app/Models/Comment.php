@@ -18,5 +18,19 @@ class Comment extends Model
     public function petition(): BelongsTo
     {
         return $this->belongsTo(Petition::class);
-    }    
+    }
+    
+    public function signature(): BelongsTo
+    {
+        return $this->belongsTo(Signature::class);
+    }
+
+    protected $fillable = [
+        'user_id',
+        'petition_id',
+        'signature_id',
+        'approvato',
+        'contenuto',
+        'created_at'
+    ];
 }

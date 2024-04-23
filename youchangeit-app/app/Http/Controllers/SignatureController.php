@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSignatureRequest;
 use App\Http\Requests\UpdateSignatureRequest;
+use App\Models\Comment;
 use App\Models\Signature;
+use Carbon\Carbon;
 
 class SignatureController extends Controller
 {
@@ -13,7 +15,7 @@ class SignatureController extends Controller
      */
     public function index()
     {
-        //
+        return 'Sono il metodo show di signature';
     }
 
     /**
@@ -29,7 +31,26 @@ class SignatureController extends Controller
      */
     public function store(StoreSignatureRequest $request)
     {
-        //
+        $data = $request->only(['user_id', 'petition_id']);
+        $data['created_at'] = Carbon::now();
+
+        $signature = Signature::create($data);
+
+        if ($request->filled('commento')) {
+            Comment::create([
+                'user_id' => auth()->id(),
+                'petition_id' => $request->petition_id,
+                'signature_id' => $signature->id,
+                'contenuto' => $request->commento,
+                'approvato' => true,
+                'created_at' => $signature->created_at
+            ]);
+        }
+
+        // Aggiungo un messaggio flash alla sessione
+        session()->flash('success', 'Grazie per aver firmato la petizione!');
+
+        return redirect()->back();
     }
 
     /**

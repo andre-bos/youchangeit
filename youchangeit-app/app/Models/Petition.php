@@ -31,6 +31,11 @@ class Petition extends Model
         return $this->hasMany(Signature::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     // Aumento dinamicamente l'obiettivo delle firme da raggiungere in maniera proporzionale alle firme già raccolte sulla base di soglie e un coefficiente di moltiplicazione
     public function getObiettivoFirmeAttribute()
     {

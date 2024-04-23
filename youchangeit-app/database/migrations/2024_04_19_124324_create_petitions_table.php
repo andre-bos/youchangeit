@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('citta_interesse');
             $table->string('provincia_interesse');
             $table->string('img_url');
-            $table->integer('obiettivo_firme');
             $table->string('status');
 
             $table->foreignId('user_id');
