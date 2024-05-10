@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePetitionRequest;
 use App\Http\Requests\UpdatePetitionRequest;
+use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Petition;
+use Illuminate\Http\Request;
 
 class PetitionController extends Controller
 {
@@ -48,11 +51,66 @@ class PetitionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createStepOne(Request $request)
     {
-        //
+        $petition = $request->session()->get('petition');
+        return view('petitioncreate1', ['petition' => $petition]);
+    }
 
-        return "Sono il metodo create di petitions --AUTENTICATO";
+    public function postCreateStepOne(Request $request)
+    {
+        $validatedData = $request->validate([
+            'area_interesse' => 'required|in:locale,nazionale,globale',
+        ]);
+
+        print_r($validatedData);
+
+        if(empty($request->session()->get('petition'))) {
+            $petition = new Petition();
+            $petition->fill($validatedData);
+            $request->session()->put('petition', $petition);
+        } else {
+            $petition = $request->session()->get('petition');
+            $petition->fill($validatedData);
+            $request->session()->put('petition', $petition);
+        }
+
+        print_r($request->session()->all());
+
+        return redirect()->route('petitions.create.step.two');
+    }
+
+    public function createStepTwo(Request $request)
+    {
+        $petition = $request->session()->get('petition');
+        $categories = Category::all();
+        return view('petitioncreate2', ['categories' => $categories, 'petition' => $petition]);
+    }
+
+    public function postCreateStepTwo(Request $request)
+    {
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+        ]);
+  
+        $petition = $request->session()->get('petition');
+        $petition->fill($validatedData);
+        $request->session()->put('petition', $petition);
+  
+        return redirect()->route('petitions.create.step.three');
+
+    }
+
+    public function createStepThree(Request $request)
+    {
+        $petition = $request->session()->get('petition');
+        return view('petitioncreate3', ['petition' => $petition]);
+    }
+
+    public function postCreateStepThree(Request $request)
+    {
+        
+
     }
 
     /**
@@ -71,8 +129,9 @@ class PetitionController extends Controller
     public function show($id)
     {
         $petition = Petition::with('comments.user')->withCount('signatures')->find($id);
+        $comments = $petition->comments()->paginate(5);
 
-        return view('petitiondetail', ['petition' => $petition]);
+        return view('petitiondetail', ['petition' => $petition, 'comments' => $comments]);
     }
 
     /**
@@ -100,4 +159,6 @@ class PetitionController extends Controller
     {
         // Per adesso, lo ignoro perché non sto facendo chiamate AJAX
     }
+
+    
 }

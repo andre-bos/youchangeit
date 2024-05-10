@@ -36,10 +36,17 @@ class StoreSignatureRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+
+        $rules = [
             'user_id' => 'required|integer|exists:users,id',
             'petition_id' => 'required|integer|exists:petitions,id',
             'commento' => 'nullable|string',
         ];
+    
+        if ($this->filled('commento')) {
+            $rules['commento'] = 'between:10,2000';
+        }
+    
+        return $rules;
     }
 }

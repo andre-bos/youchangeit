@@ -31,26 +31,27 @@ class SignatureController extends Controller
      */
     public function store(StoreSignatureRequest $request)
     {
-        $data = $request->only(['user_id', 'petition_id']);
-        $data['created_at'] = Carbon::now();
 
-        $signature = Signature::create($data);
+    $data = $request->only(['user_id', 'petition_id']);
+    $data['created_at'] = Carbon::now();
 
-        if ($request->filled('commento')) {
-            Comment::create([
-                'user_id' => auth()->id(),
-                'petition_id' => $request->petition_id,
-                'signature_id' => $signature->id,
-                'contenuto' => $request->commento,
-                'approvato' => true,
-                'created_at' => $signature->created_at
-            ]);
-        }
+    $signature = Signature::create($data);
 
-        // Aggiungo un messaggio flash alla sessione
-        session()->flash('success', 'Grazie per aver firmato la petizione!');
+    if ($request->filled('commento')) {
+        Comment::create([
+            'user_id' => auth()->id(),
+            'petition_id' => $request->petition_id,
+            'signature_id' => $signature->id,
+            'contenuto' => $request->commento,
+            'approvato' => true,
+            'created_at' => $signature->created_at
+        ]);
+    }
 
-        return redirect()->back();
+    // Aggiungo un messaggio flash alla sessione
+    session()->flash('success', 'Grazie per aver firmato la petizione!');
+    return redirect()->back();
+
     }
 
     /**

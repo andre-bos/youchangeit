@@ -1,7 +1,3 @@
-<?php
-    // print_r($petition->signatures_count);
-?>
-
 @extends('layouts.front')
 
 @section('main')
@@ -28,7 +24,7 @@
                 <h3 class="font-bold text-2xl text-black mb-2">Commenti</h3>
                 @if($petition->comments->count() > 0)
                     <ul>
-                        @foreach ($petition->comments as $comment)
+                        @foreach ($comments as $comment)
                             <li>
                                 <x-comment-card
                                 :imgAutore="$comment->user->img_url"
@@ -43,6 +39,7 @@
                     <p class="font-bold text-large text-black text-center">Non ci sono ancora commenti</p>
                 @endif
             </div>
+            {{ $comments->links() }}
        </div>
 
 
@@ -86,6 +83,11 @@
                     <form action="/signatures" method="POST">
                         @csrf
                         <textarea class="form-textarea rounded-lg" name="commento" cols="25" rows="5"></textarea>
+                        @if ($errors->has('commento'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('commento') }}
+                            </div>
+                        @endif
                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         <input type="hidden" name="petition_id" value="{{ $petition->id }}">
                         <input type="submit" value="Firma la petizione ora" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 mt-3">

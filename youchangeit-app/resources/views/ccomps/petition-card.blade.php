@@ -2,7 +2,7 @@
     <div class="border-b border-gray-600 col-span-3">
         <p class="pl-3 font-bold text-sm text-black mt-3 mb-3">Indirizzata a: <a href="" class="hover:underline">{{$decMakerNome}} {{$decMakerCognome}}</a></p>
     </div>
-    <h3 class="pl-3 mt-4 col-span-2 font-bold text-lg text-black hover:underline"><a href="/petitions/{{$petitionId}}">{{$titolo}}</a></h3>
+    <h3 class="pl-3 mt-4 col-span-2 font-bold text-lg text-black hover:underline"><a href="/petitions/detail/{{$petitionId}}">{{$titolo}}</a></h3>
     <p class="pl-3 col-span-2 text-gray-600">
         {{ strlen($descrizione) > 260 ? substr($descrizione, 0, 260) . '...' : $descrizione }}
     </p>
