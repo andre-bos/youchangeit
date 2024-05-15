@@ -63,8 +63,6 @@ class PetitionController extends Controller
             'area_interesse' => 'required|in:locale,nazionale,globale',
         ]);
 
-        print_r($validatedData);
-
         if(empty($request->session()->get('petition'))) {
             $petition = new Petition();
             $petition->fill($validatedData);
@@ -75,9 +73,34 @@ class PetitionController extends Controller
             $request->session()->put('petition', $petition);
         }
 
-        print_r($request->session()->all());
+        $petition = $request->session()->get('petition');
 
-        return redirect()->route('petitions.create.step.two');
+        if($petition->area_interesse === 'locale') {
+            return redirect()->route('petitions.create.step.one.bis');
+        } else {
+            return redirect()->route('petitions.create.step.two');
+        }
+    }
+
+    public function createStepOneBis(Request $request)
+    {
+        $petition = $request->session()->get('petition');
+        
+        return view('petitioncreate1bis', ['petition' => $petition]);
+    }
+
+    public function postCreateStepOneBis(Request $request)
+    {
+        /* $validatedData = $request->validate([
+            'category_id' => 'required',
+        ]);
+  
+        $petition = $request->session()->get('petition');
+        $petition->fill($validatedData);
+        $request->session()->put('petition', $petition);
+  
+        return redirect()->route('petitions.create.step.three'); */
+
     }
 
     public function createStepTwo(Request $request)
@@ -103,8 +126,7 @@ class PetitionController extends Controller
 
     public function createStepThree(Request $request)
     {
-        $petition = $request->session()->get('petition');
-        return view('petitioncreate3', ['petition' => $petition]);
+        
     }
 
     public function postCreateStepThree(Request $request)
