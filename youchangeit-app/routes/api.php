@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/countries', [ApiController::class, 'getCountries']);
-Route::get('/countries/{countryCode}/states', [ApiController::class, 'getStates']);
-Route::get('/countries/{countryCode}/states/{stateRegionCode}/cities', [ApiController::class, 'getCities']);
+Route::get('/countries/{countryCode}/regions', [ApiController::class, 'getStates']);
+Route::get('/countries/{countryCode}/regions/{stateRegionCode}/cities', [ApiController::class, 'getCities']);
 
 // Aggiungi altre rotte necessarie qui

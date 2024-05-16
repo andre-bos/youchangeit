@@ -26,14 +26,24 @@ stateRegionSelector.addEventListener('change', loadCities)
 
 function loadCountries() {
 
-    fetch('/api/countries')
+    /* fetch('/api/countries')
     .then(Response => Response.json()).then(data => {
         data.forEach(country => {
            const option = document.createElement('option')
-           option.value = country.iso2
+           option.value = country.code
            option.textContent = country.name
            countrySelector.appendChild(option) 
         });
+    }).catch(err => console.error(err)) */
+
+    fetch('/api/countries')
+    .then(Response => Response.json()).then(countries => {
+        countries.data.forEach(country => {
+            const option = document.createElement('option')
+            option.value = country.code
+            option.textContent = country.name
+            countrySelector.appendChild(option)
+        })
     }).catch(err => console.error(err))
 
     stateRegionSelector.disabled = true
@@ -53,12 +63,13 @@ function loadStates() {
     const selectedCountryCode = countrySelector.value
     stateRegionSelector.innerHTML = '<option value="">Seleziona stato/regione</option>'
 
-    fetch(`/api/countries/${selectedCountryCode}/states`).then(Response => Response.json()).then(data => {
-        data.forEach(stateRegion => {
+    fetch(`/api/countries/${selectedCountryCode}/regions`).then(Response => Response.json()).then(stateRegions => {
+        stateRegions.data.forEach(stateRegion => {
             const option = document.createElement('option')
-            option.value = stateRegion.iso2
+            option.value = stateRegion.isoCode
             option.textContent = stateRegion.name
             stateRegionSelector.appendChild(option)
+            console.log(stateRegion)
         })
     })
 }
@@ -72,12 +83,12 @@ function loadCities() {
     const selectedStateRegionCode = stateRegionSelector.value
     citySelector.innerHTML = '<option value="">Seleziona città</option>'
 
-    fetch(`/api/countries/${selectedCountryCode}/states/${selectedStateRegionCode}/cities`)
+    fetch(`/api/countries/${selectedCountryCode}/regions/${selectedStateRegionCode}/cities`)
     .then(Response => Response.json())
-    .then(data => {
-        data.forEach(city => {
+    .then(cities => {
+        cities.data.forEach(city => {
             const option = document.createElement('option')
-            option.value = city.iso2
+            option.value = city.name
             option.textContent = city.name
             citySelector.appendChild(option)
         })

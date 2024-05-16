@@ -9,10 +9,15 @@ class ApiController extends Controller
     public function getCountries()
     {
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', 'https://api.countrystatecity.in/v1/countries', [
+        $response = $client->request('GET', 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries', [
             'headers' => [
-                'X-CSCAPI-KEY' => config('services.cscapi.key'),
+                'X-RapidAPI-Key' => config('services.rapidapi.key'),
+                'X-RapidAPI-Host' => config('services.rapidapi.host'),
             ],
+
+            'query' => [
+                'limit' => '100'
+            ]
         ]);
 
         return $response->getBody();
@@ -21,21 +26,31 @@ class ApiController extends Controller
     public function getStates(string $countryCode)
     {
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', 'https://api.countrystatecity.in/v1/countries/' . $countryCode . '/states', [
+        $response = $client->request('GET', 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries/' . $countryCode . '/regions', [
             'headers' => [
-                'X-CSCAPI-KEY' => config('services.cscapi.key'),
+                'X-RapidAPI-Key' => config('services.rapidapi.key'),
+                'X-RapidAPI-Host' => config('services.rapidapi.host'),
+            ],
+
+            'query' => [
+                'limit' => '100',
             ],
         ]);
 
         return $response->getBody();
     }
 
-    public function getCities(string $countryCode, string $stateRegionCode)
+    public function getCities(string $countryCode, $stateRegionCode)
     {
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', 'https://api.countrystatecity.in/v1/countries/' . $countryCode . '/states/' . $stateRegionCode . '/cities', [
+        $response = $client->request('GET', 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries/' . $countryCode . '/regions/' . $stateRegionCode . '/cities', [
             'headers' => [
-                'X-CSCAPI-KEY' => config('services.cscapi.key'),
+                'X-RapidAPI-Key' => config('services.rapidapi.key'),
+                'X-RapidAPI-Host' => config('services.rapidapi.host'),
+            ],
+
+            'query' => [
+                'limit' => '100',
             ],
         ]);
 
