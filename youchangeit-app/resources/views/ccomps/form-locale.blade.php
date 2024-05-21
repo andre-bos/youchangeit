@@ -63,10 +63,11 @@
             </ul>
         </div>
     </div>
-	<button type="submit" class="ml-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Continua</button>
+	<button type="submit" class="mt-5 col-start-3 justify-self-end text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Continua</button>
 </form>
 
 <script>
+    const selectBoxes = document.querySelectorAll('.select-box')
     const selectInputs = document.querySelectorAll('.select-input');
     const selectInputFields = document.querySelectorAll('.select-input input');
     const selectArrows = document.querySelectorAll('.select-arrow');
@@ -78,9 +79,26 @@
         loadCountries();
     });
 
+    document.addEventListener('click', (event) => {
+        const isClickInsideSelectBox = Array.from(selectBoxes).some(selectBox => selectBox.contains(event.target) && !selectBox.isSameNode(event.target));
+
+        console.log('target document', event.target)
+
+        if (!isClickInsideSelectBox) {
+            contents.forEach((content) => {
+                content.classList.add('hidden');
+            })
+            
+            selectArrows.forEach((selectArrow) => {
+                selectArrow.classList.remove('rotate-180')
+            })
+        }
+    })
+
     function toggleDropdownContent() {
         selectInputs.forEach((selectInput, index) => {
             selectInput.addEventListener('click', (event) => {
+                //event.stopPropagation(); // Impedisce che l'evento si propaghi al document
                 const parent = event.target.closest('.select-box');
                 const content = parent.querySelector('.content');
                 const selectArrow = selectArrows[index];
@@ -111,15 +129,6 @@
                     });
                 });
             });
-
-            /* document.addEventListener('click', (e) => {
-                if (!parent.contains(e.target)) {
-                    contents.forEach((content, index) => {
-                        content.classList.add('hidden');
-                        selectArrows[index].classList.remove('rotate-180');
-                    });
-                }
-            }); */
         });
     }
 
